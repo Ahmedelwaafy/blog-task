@@ -1,6 +1,6 @@
-import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { TFunction } from "i18next";
-import { useMemo, useRef } from "react";
+import { useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { fetcherFunction } from "../services/fetchData";
 import { IPostType } from "../types";
@@ -10,9 +10,7 @@ import PostCard from "./PostCard";
 import PostCardSkeleton from "./PostCardSkeleton";
 
 function PostsList({ t }: { t: TFunction }) {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const queryClient = useQueryClient();
-  const isInitialMount = useRef(true);
+  const [searchParams] = useSearchParams();
 
   const {
     data,
@@ -21,9 +19,7 @@ function PostsList({ t }: { t: TFunction }) {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-    isRefetching,
     isPending,
-    refetch,
   } = useInfiniteQuery({
     queryKey: ["Posts", searchParams.get("q") || ""],
     queryFn: ({ pageParam }) =>
@@ -32,6 +28,9 @@ function PostsList({ t }: { t: TFunction }) {
         query: searchParams.get("q")?.replace(/-/g, " ") || "",
       }),
     getNextPageParam: (lastPage, allPages, lastPageParam) => {
+      if (!allPages) {
+        console.log("");
+      }
       if (lastPage?.length === 0) {
         return undefined;
       }
@@ -42,33 +41,11 @@ function PostsList({ t }: { t: TFunction }) {
   });
   console.log("data", data);
 
-  /* const Posts: IPostType[] = useMemo(() => {
+  const Posts: IPostType[] = useMemo(() => {
     return data?.pages?.reduce((acc: IPostType[], page: IPostType[]) => {
       return [...acc, ...page];
     }, []);
-  }, [data]); */
-  const Posts = [
-    {
-      userId: 1,
-      id: 1,
-      title:
-        "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-      body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
-    },
-    {
-      userId: 2,
-      id: 13,
-      title: "dolorum ut in voluptas mollitia et saepe quo animi",
-      body: "aut dicta possimus sint mollitia voluptas commodi quo doloremque\niste corrupti reiciendis voluptatem eius rerum\nsit cumque quod eligendi laborum minima\nperferendis recusandae assumenda consectetur porro architecto ipsum ipsam",
-    },
-    {
-      userId: 2,
-      id: 15,
-      title: "eveniet quod temporibus",
-      body: "reprehenderit quos placeat\nvelit minima officia dolores impedit repudiandae molestiae nam\nvoluptas recusandae quis delectus\nofficiis harum fugiat vitae",
-    },
-  ];
-  console.log("Posts", Posts);
+  }, [data]);
 
   return (
     <section className="w-3/5 bg- mx-auto md:w-11/12 flex-col-center  ">
