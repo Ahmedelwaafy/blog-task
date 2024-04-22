@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { setLang } from "./app/Features/MiscellaneousSlice.tsx";
 import { useAppDispatch } from "./app/reduxHooks.ts";
+import Layout from "./components/Layout.tsx";
 function App() {
   const { i18n } = useTranslation("");
   const dispatchRedux = useAppDispatch();
@@ -28,7 +29,23 @@ function App() {
     },
     {
       path: `/${i18n.language?.startsWith("ar") ? "ar" : "en"}`,
-      lazy: () => import("./Pages/HomePage/HomePage.tsx"),
+      children: [
+        //!-------- Pages Layout--------
+        {
+          element: <Layout />,
+          children: [
+            {
+              index: true,
+              //!react router built-in lazy loading component
+              lazy: () => import("./Pages/HomePage/HomePage.tsx"),
+            },
+            {
+              path: "not-found",
+              lazy: () => import("./components/NotFound.tsx"),
+            },
+          ],
+        },
+      ],
     },
     //!NotFound
     {
