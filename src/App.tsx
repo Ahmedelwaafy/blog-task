@@ -14,7 +14,7 @@ function App() {
   const lng = i18n.language?.startsWith("ar") ? "ar" : "en";
   //!we use startsWith instead of ==== whereas some languages codes consist of 2 words as en-us but the language in the url always consists of one word
   useEffect(() => {
-    dispatchRedux(setLang(lng));
+    dispatchRedux(setLang(i18n.language?.startsWith("ar") ? "ar" : "en"));
     document.documentElement.dir = i18n.dir();
     document.documentElement.lang = i18n.language?.startsWith("ar")
       ? "ar"
@@ -24,10 +24,12 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Navigate to={`/${lng}`} />,
+      element: (
+        <Navigate to={`/${i18n.language?.startsWith("ar") ? "ar" : "en"}`} />
+      ),
     },
     {
-      path: `/${lng}`,
+      path: `/${i18n.language?.startsWith("ar") ? "ar" : "en"}`,
       children: [
         //!-------- Pages Layout--------
         {
