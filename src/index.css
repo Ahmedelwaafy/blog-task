@@ -62,7 +62,7 @@ html:lang(ar) body {
 .mantine-Spoiler-control {
   color: #04220c !important;
 
-  @apply transition-all duration-300 ease-in-out !decoration-wavy;
+  @apply transition-all duration-300 ease-in-out !decoration-wavy !underline-offset-4;
 }
 
 .dot-spinner {

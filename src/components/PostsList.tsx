@@ -49,7 +49,7 @@ function PostsList({ t }: { t: TFunction }) {
 
   return (
     <section className="w-3/5 bg- mx-auto md:w-11/12 flex-col-center  ">
-      <h1 className="font-semibold uppercase text-2xl text-foreground my-10 decoration-wavy underline underline-offset-8">
+      <h1 className="font-semibold uppercase text-2xl text-foreground my-10 decoration-wavy underline underline-offset-[10px]">
         {t("title")}
       </h1>
       <div className="w-full space-y-9">

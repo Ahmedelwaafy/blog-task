@@ -6,7 +6,7 @@ import useWindowSize from "../Hooks/useWindowSize";
 function PostCard({ post, t }: { post: IPostType; t: TFunction }) {
   const { width } = useWindowSize();
   return (
-    <div className="PostCard px-5 pt-5 pb-7 border-foreground border-2 rounded-tr-3xl rounded-bl-3xl hover:rounded-tr-none hover:rounded-bl-none hover:rounded-tl-3xl hover:rounded-br-3xl relative overflow-hidden odd:bg-foreground trns select-none odd:text-background  group hover:bg-accent hover:border-accent  hover:text-background">
+    <div className="PostCard px-5 pt-5 pb-7 border-foreground border-2 rounded-tr-3xl rounded-bl-3xl hover:rounded-tr-none hover:rounded-bl-none hover:rounded-tl-3xl hover:rounded-br-3xl relative overflow-hidden odd:bg-foreground trns  odd:text-background  group hover:bg-accent hover:border-accent  hover:text-background">
       <Spoiler
         maxHeight={width < 560 ? 120 : width < 1200 ? 130 : 100}
         showLabel={t("read_more")}
