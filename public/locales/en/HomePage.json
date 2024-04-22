@@ -1,0 +1,19 @@
+{
+  "tab": {
+    "title": "Best Blog",
+    "description": "Best blog on the earth"
+  },
+  "title": "All Articles",
+  "NavSearch": { "placeholder": "Search ..." },
+  "read_more": "Read More",
+  "hide": "Hide",
+  "show_more": "Show More",
+  "ErrorMessage": "Something wrong has happened, please try again later!",
+  "NoItemsMessage": "There are no Articles!",
+  "validations": {
+    "query": {
+      "pattern": "Please enter a valid text"
+    }
+  },
+  "footer": "All Rights Reserved"
+}
