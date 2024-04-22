@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import {
+  Navigate,
   RouterProvider,
-  createBrowserRouter
+  createBrowserRouter,
 } from "react-router-dom";
 import { setLang } from "./app/Features/MiscellaneousSlice.tsx";
 import { useAppDispatch } from "./app/reduxHooks.ts";
+import Layout from "./components/Layout.tsx";
 function App() {
   const { i18n } = useTranslation("");
   const dispatchRedux = useAppDispatch();
@@ -21,8 +23,29 @@ function App() {
 
   const router = createBrowserRouter([
     {
-      path: "/en",
-      lazy: () => import("./Pages/HomePage/HomePage.tsx"),
+      path: "/",
+      element: <Navigate to={`/${lng}`} />,
+    },
+    {
+      path: `/${lng}`,
+      children: [
+        //!-------- Pages Layout--------
+        {
+          element: <Layout />,
+          children: [
+            {
+              index: true,
+              //!react router built-in lazy loading component
+              lazy: () => import("./Pages/HomePage/HomePage.tsx"),
+            },
+          ],
+        },
+      ],
+    },
+    //!NotFound
+    {
+      path: "*",
+      lazy: () => import("./components/NotFound.tsx"),
     },
   ]);
 
