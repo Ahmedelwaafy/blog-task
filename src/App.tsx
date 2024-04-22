@@ -29,21 +29,12 @@ function App() {
     },
     {
       path: `/${i18n.language?.startsWith("ar") ? "ar" : "en"}`,
+      element: <Layout />,
       children: [
-        //!-------- Pages Layout--------
         {
-          element: <Layout />,
-          children: [
-            {
-              index: true,
-              //!react router built-in lazy loading component
-              lazy: () => import("./Pages/HomePage/HomePage.tsx"),
-            },
-            {
-              path: "not-found",
-              lazy: () => import("./components/NotFound.tsx"),
-            },
-          ],
+          index: true,
+          //!react router built-in lazy loading component
+          lazy: () => import("./Pages/HomePage/HomePage.tsx"),
         },
       ],
     },
