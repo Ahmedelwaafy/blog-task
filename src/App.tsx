@@ -11,7 +11,6 @@ import Layout from "./components/Layout.tsx";
 function App() {
   const { i18n } = useTranslation("");
   const dispatchRedux = useAppDispatch();
-  const lng = i18n.language?.startsWith("ar") ? "ar" : "en";
   //!we use startsWith instead of ==== whereas some languages codes consist of 2 words as en-us but the language in the url always consists of one word
   useEffect(() => {
     dispatchRedux(setLang(i18n.language?.startsWith("ar") ? "ar" : "en"));
